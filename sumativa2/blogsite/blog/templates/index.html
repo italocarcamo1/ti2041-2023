@@ -1,0 +1,76 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" >
+    
+</head>
+<body>
+
+    <header>
+        <h1>Blog Italo Carcamo</h1>
+    </header>
+
+    <nav>
+        <a href="#">Principal</a> |
+        <a href="#">Ayuda</a> |
+        <a href="#">Contacto</a>
+    </nav>
+
+    <div class="main-container">
+        <main>
+            <div class="article-container">
+                {% if publications%}
+                {% for post in publications %}
+                    
+                        <h1>{{post.titulo}}</h1><br><hr>
+                            <p> {{post.texto}}</p><hr>
+                              <p> ({{post.fecha}}): {{post.autor}}: {{post.etiquetas}}: {{post.categoria}}
+                            </p>
+                {% endfor %}
+            {% else %}
+                <b> No hay posts </b>
+            {% endif %}
+            </div>
+
+            <div class="aside-container">
+                <h2>Lista de publicaciones ({{ publications|length }})</h2>
+                {% for post in publications %}
+                <ul>
+                    <li>
+                    <a href="">{{post.titulo}}</a>
+                </li>
+                </ul>
+                    {% endfor %}
+                <h2>Categoria</h2>
+                {% for cat in categories %}
+                <ul>
+                    <li>
+                        <a href="">{{cat.nombre}}</a>
+                    </li>
+                </ul>
+
+                    {% endfor %}
+                    <h2>Etiquetas</h2>
+                {% for hash in hashtags %}
+                <ul>
+                    <li>
+                        <a href="">{{hash.nombre}}</a>
+                    </li>
+                </ul>
+
+                    {% endfor %}
+     
+            </div>
+        </main>
+
+        <footer>
+            Blog creado por Italo Carcamo. Todos los derechos reservados ©
+        </footer>
+    </div>
+
+</body>
+</html>
